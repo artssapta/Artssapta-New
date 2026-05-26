@@ -9,8 +9,34 @@ import TextBlock from '../components/blocks/TextBlock.astro';
 import YouTubeVideo from '../components/blocks/YouTubeVideo.astro';
 import Gallery from '../components/blocks/Gallery.astro';
 
-const page = await getEntry('pages', 'home');
-const { blocks } = page.data;
+const homePage = await getEntry('pages', 'home');
+const eventsPage = await getEntry('pages', 'events');
+const feedbackPage = await getEntry('pages', 'feedback');
+const regSpotlightPage = await getEntry('pages', 'reg-spotlight');
+const regGroupPage = await getEntry('pages', 'reg-group');
+const mediaPastPage = await getEntry('pages', 'media-past');
+const mediaVideosPage = await getEntry('pages', 'media-videos');
+const mediaChroniclesPage = await getEntry('pages', 'media-chronicles');
+
+const homeBlocks = homePage?.data?.blocks || [];
+const eventsBlocks = eventsPage?.data?.blocks || [];
+const feedbackBlocks = feedbackPage?.data?.blocks || [];
+const regSpotlightBlocks = regSpotlightPage?.data?.blocks || [];
+const regGroupBlocks = regGroupPage?.data?.blocks || [];
+const mediaPastBlocks = mediaPastPage?.data?.blocks || [];
+const mediaVideosBlocks = mediaVideosPage?.data?.blocks || [];
+const mediaChroniclesBlocks = mediaChroniclesPage?.data?.blocks || [];
+
+const components = {
+  hero: Hero,
+  about: About,
+  'team-grid': TeamGrid,
+  text: TextBlock,
+  youtube: YouTubeVideo,
+  gallery: Gallery,
+  events: Events,
+  'google-form': GoogleForm,
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -101,46 +127,59 @@ const { blocks } = page.data;
     </header>
 
     <main id="home" class="tab-content active">
-        {blocks.map((block) => {
-            if (block.type === 'hero') return <Hero {...block} />;
-            if (block.type === 'about') return <About {...block} />;
-            if (block.type === 'team-grid') return <TeamGrid {...block} />;
-            if (block.type === 'text') return <TextBlock {...block} />;
-            if (block.type === 'youtube') return <YouTubeVideo {...block} />;
-            if (block.type === 'gallery') return <Gallery {...block} />;
+        {homeBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
         })}
     </main>
 
     <section id="events" class="tab-content">
-         {blocks.map((block) => {
-            if (block.type === 'events') return <Events {...block} />;
+        {eventsBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
         })}
     </section>
 
     <section id="feedback" class="tab-content">
-         {blocks.map((block) => {
-            if (block.type === 'google-form') return <GoogleForm {...block} />;
+        {feedbackBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
         })}
     </section>
 
     <section id="reg-spotlight" class="tab-content">
-        <div class="container"><h2 class="section-title">Sapta Spotlight Registration</h2></div>
+        {regSpotlightBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
+        })}
     </section>
 
     <section id="reg-group" class="tab-content">
-        <div class="container"><h2 class="section-title">Group Registration</h2></div>
+        {regGroupBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
+        })}
     </section>
 
     <section id="media-past" class="tab-content">
-        <div class="container"><h2 class="section-title">Past Events</h2></div>
+        {mediaPastBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
+        })}
     </section>
 
     <section id="media-videos" class="tab-content">
-        <div class="container"><h2 class="section-title">Videos</h2></div>
+        {mediaVideosBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
+        })}
     </section>
 
     <section id="media-chronicles" class="tab-content">
-        <div class="container"><h2 class="section-title">Chronicles</h2></div>
+        {mediaChroniclesBlocks.map((block) => {
+            const Component = components[block.type];
+            return Component ? <Component {...block} /> : null;
+        })}
     </section>
 
     <footer>

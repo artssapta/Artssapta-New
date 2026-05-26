@@ -12,11 +12,4 @@ blocks:
     imageSide: right
   - type: team-grid
     title: Meet the Team
-  - type: events
-    title: Upcoming Events
-    flyerImage: "/assets/flyer_image.png"
-    color: "#2A7396"
-  - type: google-form
-    url: https://docs.google.com/forms/d/1VBaaAPzAlKIjdNRbv_KWtatV9t9903a6uEI2kc_DFr4/viewform?edit_requested=true
-    height: "800px"
 ---

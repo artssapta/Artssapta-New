@@ -34,6 +34,25 @@ const pages = defineCollection({
         url: z.string(),
         height: z.string().optional(),
       }),
+      z.object({
+        type: z.literal('text'),
+        heading: z.string().optional(),
+        text: z.string().optional(),
+        alignment: z.enum(['left', 'center', 'right']).optional(),
+      }),
+      z.object({
+        type: z.literal('youtube'),
+        title: z.string().optional(),
+        videoUrl: z.string().optional(),
+      }),
+      z.object({
+        type: z.literal('gallery'),
+        title: z.string().optional(),
+        images: z.array(z.object({
+          src: z.string(),
+          alt: z.string().optional(),
+        })).optional(),
+      }),
     ])),
   }),
 });
