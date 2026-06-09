@@ -1,8 +1,7 @@
 ---
 title: Sapta Spotlight
 blocks:
-  - type: text
-    heading: Sapta Spotlight Registration
-    text: Fill out this section or add blocks for Sapta Spotlight registration.
-    alignment: center
+  - type: google-form
+    url: "https://docs.google.com/forms/d/e/1FAIpQLScgKqjFdibHT11I5htoLphuKNhGikKiIOyrpeQwuGSD2ul0mw/viewform?usp=header"
+    height: "800px"
 ---

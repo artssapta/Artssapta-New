@@ -1,14 +1,14 @@
 ---
 const { title, subtitle, color = "#6091B0" } = Astro.props;
 ---
-<section class="hero" style={`background-color: ${color};`}>
+<section class="hero" style={`background-color: ${color}; background-image: url('/assets/hero_music_banner.png');`}>
     <h1>{title}</h1>
     {subtitle && <p>{subtitle}</p>}
 </section>
 
 <style>
     .hero { 
-        height: 300px; 
+        height: 420px; 
         display: flex; 
         flex-direction: column; 
         justify-content: center; 
@@ -16,9 +16,26 @@ const { title, subtitle, color = "#6091B0" } = Astro.props;
         text-align: center; 
         color: white; 
         margin-bottom: 40px; 
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding-top: 80px; /* Space for absolute header */
+        box-sizing: border-box;
     }
     .hero h1 { 
         font-family: 'Playfair Display', serif; 
-        font-size: 5rem; 
+        font-size: 5.5rem; 
+        font-weight: 700;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .hero p {
+        font-family: 'Lora', serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        max-width: 900px;
+        line-height: 1.4;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 </style>

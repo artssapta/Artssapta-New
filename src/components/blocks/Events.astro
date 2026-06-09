@@ -15,12 +15,14 @@ const { title, flyerImage, color = "#2A7396" } = Astro.props;
 
 <style>
     .hero-small { 
-        height: 200px; 
+        height: 250px; 
         display: flex; 
         justify-content: center; 
         align-items: center; 
         color: white; 
         margin-bottom: 40px; 
+        padding-top: 80px; /* Space for absolute header */
+        box-sizing: border-box;
     }
     .hero-small h1 { font-family: 'Playfair Display', serif; font-size: 3rem; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
