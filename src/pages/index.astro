@@ -59,9 +59,14 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
 
         body {
             font-family: var(--font-serif);
-            background: radial-gradient(circle at 10% 20%, rgba(96, 145, 176, 0.03) 0%, transparent 45%), 
-                        radial-gradient(circle at 90% 80%, rgba(34, 110, 147, 0.03) 0%, transparent 50%), 
-                        #fafbfc;
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(96, 145, 176, 0.05) 0%, transparent 50%), 
+                radial-gradient(circle at 90% 80%, rgba(34, 110, 147, 0.05) 0%, transparent 50%),
+                radial-gradient(#e2e8f0 1.2px, transparent 1.2px),
+                radial-gradient(#e2e8f0 1.2px, #f8fafc 1.2px);
+            background-size: auto, auto, 30px 30px, 30px 30px;
+            background-position: 0 0, 0 0, 0 0, 15px 15px;
             color: var(--text-main);
             line-height: 1.6667;
             display: flex;
