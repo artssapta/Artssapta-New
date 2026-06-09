@@ -11,4 +11,5 @@ blocks:
     image: "/assets/image_186b79.png"
     imageSide: right
 
----
+  - type: team-grid
+    title: Meet the Team
