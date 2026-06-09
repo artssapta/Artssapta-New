@@ -35,6 +35,15 @@ const components = {
   events: Events,
   'google-form': GoogleForm,
 };
+
+const resolvePath = (path: string) => {
+  if (path && path.startsWith('/')) {
+    const base = import.meta.env.BASE_URL;
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${cleanBase}${path}`;
+  }
+  return path;
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -257,7 +266,7 @@ const components = {
     <!-- SIDE NAVIGATION -->
     <nav class="side-nav" id="sideNav">
         <div class="nav-logo" onclick="showTab('home')">
-            <img src="/assets/image_186b79.png" alt="SAPTA Logo">
+            <img src={resolvePath("/assets/image_186b79.png")} alt="SAPTA Logo">
             <span>SAPTA</span>
         </div>
         <ul class="nav-items">

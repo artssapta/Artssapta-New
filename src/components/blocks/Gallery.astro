@@ -1,12 +1,21 @@
 ---
 const { images, title } = Astro.props;
+
+const resolvePath = (path: string) => {
+  if (path && path.startsWith('/')) {
+    const base = import.meta.env.BASE_URL;
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${cleanBase}${path}`;
+  }
+  return path;
+};
 ---
 <div class="gallery">
     {title && <h2 class="section-title reveal">{title}</h2>}
     <div class="grid reveal">
         {images.map((img) => (
             <div class="gallery-item">
-                <img src={img.src} alt={img.alt || "Gallery image"} />
+                <img src={resolvePath(img.src)} alt={img.alt || "Gallery image"} />
             </div>
         ))}
     </div>

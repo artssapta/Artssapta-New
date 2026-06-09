@@ -1,11 +1,20 @@
 ---
 const { title, text, image, imageSide = "right" } = Astro.props;
+
+const resolvePath = (path: string) => {
+  if (path && path.startsWith('/')) {
+    const base = import.meta.env.BASE_URL;
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${cleanBase}${path}`;
+  }
+  return path;
+};
 ---
 <div class="about-section">
     <div class={`about-grid ${imageSide === 'left' ? 'image-left' : 'image-right'}`}>
         {imageSide === 'left' && (
             <div class="about-img reveal reveal-left">
-                <img src={image} alt={title} />
+                <img src={resolvePath(image)} alt={title} />
             </div>
         )}
         <div class="about-text reveal reveal-right">
@@ -14,7 +23,7 @@ const { title, text, image, imageSide = "right" } = Astro.props;
         </div>
         {imageSide !== 'left' && (
             <div class="about-img reveal reveal-right">
-                <img src={image} alt={title} />
+                <img src={resolvePath(image)} alt={title} />
             </div>
         )}
     </div>

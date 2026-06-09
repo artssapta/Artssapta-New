@@ -1,9 +1,18 @@
 ---
 const { name, role, description, image } = Astro.props;
+
+const resolvePath = (path: string) => {
+  if (path && path.startsWith('/')) {
+    const base = import.meta.env.BASE_URL;
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${cleanBase}${path}`;
+  }
+  return path;
+};
 ---
 <div class="team-row reveal">
     <div class="team-img">
-        <img src={image} alt={name} />
+        <img src={resolvePath(image)} alt={name} />
     </div>
     <div class="team-info">
         <h3>{name}</h3>
