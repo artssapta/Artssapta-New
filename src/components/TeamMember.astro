@@ -30,6 +30,11 @@ const resolvePath = (path: string) => {
         margin-top: 30px;
         padding-top: 30px;
         border-top: 1px solid rgba(0,0,0,0.08);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .team-row:hover {
+        transform: translateX(6px);
     }
 
     .team-img img {
@@ -37,6 +42,11 @@ const resolvePath = (path: string) => {
         border-radius: 2px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         display: block;
+        transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .team-row:hover .team-img img {
+        box-shadow: 0 8px 24px rgba(34, 110, 147, 0.15);
     }
 
     .team-info h3 {
@@ -62,9 +72,9 @@ const resolvePath = (path: string) => {
 
     .team-desc {
         font-family: 'Gentium Basic', serif;
-        font-size: 11pt;
-        line-height: 1.6667;
-        color: rgba(33, 33, 33, 1);
+        font-size: 12.5pt;
+        line-height: 1.7;
+        color: rgba(44, 44, 44, 0.95);
     }
 
     @media (max-width: 768px) {
