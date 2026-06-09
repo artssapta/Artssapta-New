@@ -14,28 +14,28 @@ const { title, text, image, imageSide = "right" } = Astro.props;
 </div>
 
 <style>
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; margin-bottom: 60px; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; margin-bottom: 60px; }
     .section-title { 
-        font-family: 'Playfair Display', serif; 
-        font-size: 2.8rem; 
-        color: #2A7396; 
+        font-family: 'Lora', serif; 
+        font-size: 2.2rem; 
+        color: #1e6c93; 
         text-align: left; 
-        margin-bottom: 25px; 
-        font-weight: 700;
+        margin-bottom: 20px; 
+        font-weight: 400;
     }
     .about-grid { 
         display: grid; 
         grid-template-columns: 1.2fr 1fr; 
-        gap: 60px; 
+        gap: 50px; 
         align-items: center; 
     }
     .about-grid.left { direction: rtl; }
     .about-grid.left .about-text { direction: ltr; }
     .about-text { 
-        font-family: 'Lora', serif;
-        font-size: 1.2rem; 
-        line-height: 1.8;
-        color: #333333;
+        font-family: 'Gentium Basic', serif;
+        font-size: 1.15rem; 
+        line-height: 1.6667;
+        color: #212121;
         text-align: left; 
     }
     .about-img img { 
