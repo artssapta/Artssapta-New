@@ -45,16 +45,14 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAPTA | Student Artists' Platform</title>
     <meta name="description" content="SAPTA is a non-profit, student-led organization that promotes Carnatic music. While providing students of all levels opportunities to perform, they also have a way to showcase their talents in unique ways.">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Gentium+Basic:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Gentium+Basic:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --sapta-teal: #226E93;
             --sapta-teal-dark: #1e6c93;
-            --nav-bg: #212121;
             --text-main: rgba(33,33,33,1);
             --font-serif: 'Gentium Basic', serif;
             --font-heading: 'Lora', serif;
-            --nav-width: 250px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -64,136 +62,119 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
             background: #ffffff;
             color: var(--text-main);
             line-height: 1.6667;
-            /* Layout: side nav + content */
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* ===================== */
-        /* SIDE NAVIGATION       */
-        /* ===================== */
-        .side-nav {
-            width: var(--nav-width);
-            min-height: 100vh;
-            background-color: var(--nav-bg);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            min-height: 100vh;
         }
 
-        /* Logo area */
-        .nav-logo {
+        /* ===================== */
+        /* TOP NAVIGATION        */
+        /* ===================== */
+        header {
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #f0f0f0;
+            height: 70px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 20px 16px 16px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .nav-logo img {
-            height: 36px;
-            border-radius: 3px;
-        }
-        .nav-logo span {
-            font-family: var(--font-heading);
-            font-size: 15pt;
-            color: rgba(255,255,255,1);
-            font-weight: 400;
-            letter-spacing: 1px;
-            line-height: 1.3;
-        }
-
-        /* Nav items */
-        .nav-items {
-            list-style: none;
-            padding: 0;
-            flex: 1;
-        }
-
-        .nav-item {
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .nav-item > .nav-link {
-            display: block;
-            padding: 11.5px 16px;
-            color: rgba(255,255,255,0.87);
-            font-family: var(--font-heading);
-            font-size: 12pt;
-            font-weight: 400;
-            cursor: pointer;
-            transition: color 0.2s, background 0.2s;
-            line-height: 1.333;
-            text-decoration: none;
-        }
-        .nav-item > .nav-link:hover,
-        .nav-item > .nav-link.active {
-            color: rgba(73, 170, 212, 1);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* Dropdown group */
-        .nav-group-label {
+        nav {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 11.5px 16px;
-            color: rgba(255,255,255,0.87);
-            font-family: var(--font-heading);
-            font-size: 12pt;
-            font-weight: 400;
+            padding: 0 20px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             cursor: pointer;
-            line-height: 1.333;
-            transition: color 0.2s, background 0.2s;
-            user-select: none;
+            text-decoration: none;
         }
-        .nav-group-label:hover {
-            color: rgba(73, 170, 212, 1);
-            background: rgba(255,255,255,0.05);
+        .nav-logo img {
+            height: 36px;
+            border-radius: 4px;
         }
-        .nav-group-label .chevron {
-            font-size: 0.7em;
-            transition: transform 0.25s;
+        .nav-logo span {
+            font-family: var(--font-heading);
+            font-size: 16pt;
+            color: #333333;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
-        .nav-group.open .nav-group-label .chevron {
-            transform: rotate(180deg);
-        }
-
-        .nav-sub {
+        .nav-links {
             list-style: none;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: rgba(0,0,0,0.2);
+            display: flex;
+            gap: 24px;
+            align-items: center;
         }
-        .nav-group.open .nav-sub {
-            max-height: 300px;
-        }
-        .nav-sub li {
-            padding: 8px 8px 8px 32px;
-            color: rgba(73, 170, 212, 1);
-            font-family: var(--font-heading);
-            font-size: 11pt;
+        .nav-links li, .nav-links .dropdown-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10.5pt;
+            color: #555555;
+            font-weight: 500;
             cursor: pointer;
-            line-height: 1.333;
-            transition: color 0.2s, background 0.2s;
+            transition: color 0.2s;
+            position: relative;
+            padding: 8px 0;
         }
-        .nav-sub li:hover {
-            color: rgba(255,255,255,1);
-            background: rgba(255,255,255,0.05);
+        .nav-links li:hover, .nav-links .dropdown:hover .dropdown-label {
+            color: #226E93;
+        }
+        .nav-links li.active {
+            color: #226E93;
+            border-bottom: 2px solid #226E93;
+        }
+        
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-label::after {
+            content: ' ▾';
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: #ffffff;
+            min-width: 180px;
+            top: 100%;
+            right: 0;
+            padding: 8px 0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            list-style: none;
+            z-index: 1010;
+        }
+        .dropdown-menu li {
+            padding: 10px 20px;
+            font-size: 9.5pt;
+            color: #444444;
+            transition: background 0.2s, color 0.2s;
+            border-bottom: none;
+        }
+        .dropdown-menu li:hover {
+            background: #f5f5f5;
+            color: #226E93;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
         }
 
         /* ===================== */
         /* MAIN CONTENT          */
         /* ===================== */
         .main-content {
-            margin-left: var(--nav-width);
             flex: 1;
-            min-height: 100vh;
+            min-height: calc(100vh - 70px);
             display: flex;
             flex-direction: column;
         }
@@ -226,7 +207,7 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
         /* FOOTER                */
         /* ===================== */
         footer {
-            background-color: var(--nav-bg);
+            background-color: #212121;
             color: rgba(255,255,255,0.87);
             padding: 32px 48px;
             font-family: var(--font-heading);
@@ -243,55 +224,38 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
             font-size: 11pt;
             color: rgba(255,255,255,0.6);
         }
-
-        /* ===================== */
-        /* RESPONSIVE            */
-        /* ===================== */
-        @media (max-width: 900px) {
-            :root { --nav-width: 0px; }
-            .side-nav { display: none; }
-            .main-content { margin-left: 0; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- SIDE NAVIGATION -->
-    <nav class="side-nav" id="sideNav">
-        <div class="nav-logo" onclick="showTab('home')">
-            <img src={resolvePath("/assets/image_186b79.png")} alt="SAPTA Logo">
-            <span>SAPTA</span>
-        </div>
-        <ul class="nav-items">
-            <li class="nav-item">
-                <span class="nav-link active" id="nav-home" onclick="showTab('home')">About Us</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link" id="nav-events" onclick="showTab('events')">Events</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link" id="nav-feedback" onclick="showTab('feedback')">Feedback Form</span>
-            </li>
-            <li class="nav-item nav-group" id="group-reg">
-                <div class="nav-group-label" onclick="toggleGroup('group-reg')">
-                    Registration <span class="chevron">▾</span>
-                </div>
-                <ul class="nav-sub">
-                    <li onclick="showTab('reg-spotlight')">Sapta Spotlight</li>
-                    <li onclick="showTab('reg-group')">Group Registration</li>
-                </ul>
-            </li>
-            <li class="nav-item nav-group" id="group-media">
-                <div class="nav-group-label" onclick="toggleGroup('group-media')">
-                    Media <span class="chevron">▾</span>
-                </div>
-                <ul class="nav-sub">
-                    <li onclick="showTab('media-past')">Past Events</li>
-                    <li onclick="showTab('media-videos')">Videos / Performances</li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    <!-- TOP NAVIGATION -->
+    <header>
+        <nav>
+            <div class="nav-logo" onclick="showTab('home')">
+                <img src={resolvePath("/assets/image_186b79.png")} alt="Logo">
+                <span>SAPTA</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" id="nav-home" onclick="showTab('home')">About Us</li>
+                <li id="nav-events" onclick="showTab('events')">Events</li>
+                <li id="nav-feedback" onclick="showTab('feedback')">Feedback Form</li>
+                <li class="dropdown" id="nav-registration">
+                    <span class="dropdown-label">Registration</span>
+                    <ul class="dropdown-menu">
+                        <li onclick="showTab('reg-spotlight')">Sapta Spotlight</li>
+                        <li onclick="showTab('reg-group')">Group Registration</li>
+                    </ul>
+                </li>
+                <li class="dropdown" id="nav-media">
+                    <span class="dropdown-label">Media</span>
+                    <ul class="dropdown-menu">
+                        <li onclick="showTab('media-past')">Past Events</li>
+                        <li onclick="showTab('media-videos')">Videos/Performances</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <!-- MAIN CONTENT -->
     <div class="main-content">
@@ -364,19 +328,26 @@ const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.
             if (target) target.classList.add('active');
 
             // Update active nav link for top-level items
-            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-links li').forEach(el => el.classList.remove('active'));
+            
+            // Highlight active tab link
             const navLink = document.getElementById('nav-' + tabId);
-            if (navLink) navLink.classList.add('active');
+            if (navLink) {
+                navLink.classList.add('active');
+            } else {
+                // If it's a sub-item, highlight the parent dropdown
+                if (tabId.startsWith('reg-')) {
+                    const parent = document.getElementById('nav-registration');
+                    if (parent) parent.classList.add('active');
+                } else if (tabId.startsWith('media-')) {
+                    const parent = document.getElementById('nav-media');
+                    if (parent) parent.classList.add('active');
+                }
+            }
 
             // Re-init scroll reveals
             setTimeout(initScrollReveal, 60);
             window.scrollTo(0, 0);
-        }
-
-        // --- Group toggles ---
-        function toggleGroup(groupId) {
-            const group = document.getElementById(groupId);
-            if (group) group.classList.toggle('open');
         }
 
         // --- Scroll Reveal ---
