@@ -16,7 +16,6 @@ const regSpotlightPage = await getEntry('pages', 'reg-spotlight');
 const regGroupPage = await getEntry('pages', 'reg-group');
 const mediaPastPage = await getEntry('pages', 'media-past');
 const mediaVideosPage = await getEntry('pages', 'media-videos');
-const mediaChroniclesPage = await getEntry('pages', 'media-chronicles');
 
 const homeBlocks = homePage?.data?.blocks || [];
 const eventsBlocks = eventsPage?.data?.blocks || [];
@@ -25,7 +24,6 @@ const regSpotlightBlocks = regSpotlightPage?.data?.blocks || [];
 const regGroupBlocks = regGroupPage?.data?.blocks || [];
 const mediaPastBlocks = mediaPastPage?.data?.blocks || [];
 const mediaVideosBlocks = mediaVideosPage?.data?.blocks || [];
-const mediaChroniclesBlocks = mediaChroniclesPage?.data?.blocks || [];
 
 const components = {
   hero: Hero,
@@ -288,7 +286,6 @@ const components = {
                 <ul class="nav-sub">
                     <li onclick="showTab('media-past')">Past Events</li>
                     <li onclick="showTab('media-videos')">Videos / Performances</li>
-                    <li onclick="showTab('media-chronicles')">Chronicles</li>
                 </ul>
             </li>
         </ul>
@@ -346,12 +343,6 @@ const components = {
             })}
         </section>
 
-        <section id="media-chronicles" class="tab-content page-body">
-            {mediaChroniclesBlocks.map((block) => {
-                const Component = components[block.type];
-                return Component ? <Component {...block} /> : null;
-            })}
-        </section>
 
         <footer>
             <h3>Contact Us</h3>
