@@ -1,36 +1,88 @@
 ---
 const { title, text, image, imageSide = "right" } = Astro.props;
-const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${p}` : p;
+
+const resolvePath = (path: string) => {
+  if (path && path.startsWith('/')) {
+    const base = import.meta.env.BASE_URL;
+    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+    return `${cleanBase}${path}`;
+  }
+  return path;
+};
 ---
-<div class="container">
-    <h2 class="section-title">{title}</h2>
-    <div class={`about-grid ${imageSide}`}>
-        <div class="about-text">
+<div class="about-section">
+    <div class={`about-grid ${imageSide === 'left' ? 'image-left' : 'image-right'}`}>
+        {imageSide === 'left' && (
+            <div class="about-img reveal reveal-left">
+                <img src={resolvePath(image)} alt={title} />
+            </div>
+        )}
+        <div class="about-text reveal reveal-right">
+            <h2 class="section-title">{title}</h2>
             <p>{text}</p>
         </div>
-        <div class="about-img">
-            <img src={resolvePath(image)} alt={title} />
-        </div>
+        {imageSide !== 'left' && (
+            <div class="about-img reveal reveal-right">
+                <img src={resolvePath(image)} alt={title} />
+            </div>
+        )}
     </div>
 </div>
 
 <style>
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; margin-bottom: 60px; }
-    .section-title { 
-        font-family: 'Lora', serif; 
-        font-size: 2.5rem; 
-        color: #2A7396; 
-        text-align: center; 
-        margin-bottom: 30px; 
+    .about-section {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 48px;
     }
-    .about-grid { 
-        display: grid; 
-        grid-template-columns: 1fr 1fr; 
-        gap: 40px; 
-        align-items: center; 
+
+    .section-title {
+        font-family: 'Lora', serif;
+        font-size: 34pt;
+        color: #226E93;
+        text-align: left;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1.2;
     }
-    .about-grid.left { direction: rtl; }
-    .about-grid.left .about-text { direction: ltr; }
-    .about-text { font-size: 1.15rem; text-align: justify; }
-    .about-img img { width: 100%; border-radius: 4px; }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .about-grid.image-left {
+        grid-template-columns: 1fr 1.2fr;
+    }
+
+    .about-text {
+        font-family: 'Gentium Basic', serif;
+        font-size: 11pt;
+        line-height: 1.6667;
+        color: rgba(33, 33, 33, 1);
+        text-align: left;
+    }
+
+    .about-img img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+        .about-section {
+            padding: 30px 24px;
+        }
+        .section-title {
+            font-size: 24pt;
+        }
+    }
 </style>
