@@ -3,7 +3,7 @@ const { videoUrl, title } = Astro.props;
 // Simple helper to extract ID from youtube URL
 const videoId = videoUrl.includes('v=') ? videoUrl.split('v=')[1].split('&')[0] : videoUrl.split('/').pop();
 ---
-<div class="video-container">
+<div class="video-container reveal">
     {title && <h3>{title}</h3>}
     <iframe 
         src={`https://www.youtube.com/embed/${videoId}`} 
@@ -14,7 +14,7 @@ const videoId = videoUrl.includes('v=') ? videoUrl.split('v=')[1].split('&')[0] 
 </div>
 
 <style>
-    .video-container { max-width: 800px; margin: 40px auto; padding: 20px; }
-    h3 { margin-bottom: 15px; font-family: 'Playfair Display', serif; }
-    iframe { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 8px; }
+    .video-container { max-width: 800px; margin: 25px auto; padding: 0 20px; }
+    h3 { margin-bottom: 20px; font-family: 'Lora', serif; font-size: 1.8rem; font-weight: 400; color: #1e6c93; text-align: center; }
+    iframe { width: 100%; aspect-ratio: 16 / 9; border: none; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
 </style>
