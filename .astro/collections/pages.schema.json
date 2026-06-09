@@ -118,6 +118,82 @@
               "type",
               "url"
             ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "text"
+              },
+              "heading": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "alignment": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "center",
+                  "right"
+                ]
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "youtube"
+              },
+              "title": {
+                "type": "string"
+              },
+              "videoUrl": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "gallery"
+              },
+              "title": {
+                "type": "string"
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string"
+                    },
+                    "alt": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "type"
+            ]
           }
         ]
       }

@@ -44,188 +44,351 @@ const components = {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SAPTA | Student Artists' Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gentium+Basic:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="description" content="SAPTA is a non-profit, student-led organization that promotes Carnatic music. While providing students of all levels opportunities to perform, they also have a way to showcase their talents in unique ways.">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Gentium+Basic:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sapta-blue: #7aa5c1;
-            --sapta-navy: #0A2635;
-            --sapta-teal: #1e6c93;
-            --text-main: #212121;
+            --sapta-teal: #226E93;
+            --sapta-teal-dark: #1e6c93;
+            --nav-bg: #212121;
+            --text-main: rgba(33,33,33,1);
             --font-serif: 'Gentium Basic', serif;
             --font-heading: 'Lora', serif;
+            --nav-width: 250px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--font-serif); background: #ffffff; color: var(--text-main); line-height: 1.6667; }
 
-        /* --- Navigation Bar --- */
-        header { 
-            background: var(--sapta-teal); 
-            position: sticky; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            z-index: 1000; 
-            padding: 12px 0; 
-            transition: all 0.3s ease; 
-        }
-        header.transparent-header { 
-            background: transparent; 
-            position: absolute; 
-        }
-        nav { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; cursor: pointer; }
-        .nav-logo img { height: 42px; border-radius: 4px; }
-        .nav-logo span { font-family: var(--font-heading); font-size: 1.6rem; color: #ffffff; font-weight: 400; letter-spacing: 0.5px; }
-
-        .nav-links { list-style: none; display: flex; gap: 25px; align-items: center; }
-        .nav-links li { cursor: pointer; font-size: 1.05rem; color: #ffffff; font-weight: 400; font-family: var(--font-heading); transition: 0.3s; position: relative; }
-        .nav-links li:hover { color: rgba(255, 255, 255, 0.8); }
-
-        /* Dropdowns */
-        .dropdown:after { content: ' ⌵'; font-size: 0.8rem; }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
+        body {
+            font-family: var(--font-serif);
             background: #ffffff;
-            min-width: 180px;
-            top: 100%;
-            right: 0;
-            padding: 8px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            list-style: none;
+            color: var(--text-main);
+            line-height: 1.6667;
+            /* Layout: side nav + content */
+            display: flex;
+            min-height: 100vh;
         }
-        .dropdown-menu li { color: #333333 !important; padding: 10px 20px; border-bottom: 1px solid #f1f5f9; font-size: 0.85rem; font-family: var(--font-heading); }
-        .dropdown-menu li:last-child { border-bottom: none; }
-        .dropdown-menu li:hover { background: #f8fafc; color: var(--sapta-teal) !important; }
-        .dropdown:hover .dropdown-menu { display: block; }
 
-        /* --- Tab System --- */
-        .tab-content { display: none; padding-bottom: 30px; animation: fadeIn 0.4s ease; }
+        /* ===================== */
+        /* SIDE NAVIGATION       */
+        /* ===================== */
+        .side-nav {
+            width: var(--nav-width);
+            min-height: 100vh;
+            background-color: var(--nav-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* Logo area */
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 16px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-logo img {
+            height: 36px;
+            border-radius: 3px;
+        }
+        .nav-logo span {
+            font-family: var(--font-heading);
+            font-size: 15pt;
+            color: rgba(255,255,255,1);
+            font-weight: 400;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        /* Nav items */
+        .nav-items {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-item > .nav-link {
+            display: block;
+            padding: 11.5px 16px;
+            color: rgba(255,255,255,0.87);
+            font-family: var(--font-heading);
+            font-size: 12pt;
+            font-weight: 400;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+            line-height: 1.333;
+            text-decoration: none;
+        }
+        .nav-item > .nav-link:hover,
+        .nav-item > .nav-link.active {
+            color: rgba(73, 170, 212, 1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Dropdown group */
+        .nav-group-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11.5px 16px;
+            color: rgba(255,255,255,0.87);
+            font-family: var(--font-heading);
+            font-size: 12pt;
+            font-weight: 400;
+            cursor: pointer;
+            line-height: 1.333;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+        }
+        .nav-group-label:hover {
+            color: rgba(73, 170, 212, 1);
+            background: rgba(255,255,255,0.05);
+        }
+        .nav-group-label .chevron {
+            font-size: 0.7em;
+            transition: transform 0.25s;
+        }
+        .nav-group.open .nav-group-label .chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-sub {
+            list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0,0,0,0.2);
+        }
+        .nav-group.open .nav-sub {
+            max-height: 300px;
+        }
+        .nav-sub li {
+            padding: 8px 8px 8px 32px;
+            color: rgba(73, 170, 212, 1);
+            font-family: var(--font-heading);
+            font-size: 11pt;
+            cursor: pointer;
+            line-height: 1.333;
+            transition: color 0.2s, background 0.2s;
+        }
+        .nav-sub li:hover {
+            color: rgba(255,255,255,1);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ===================== */
+        /* MAIN CONTENT          */
+        /* ===================== */
+        .main-content {
+            margin-left: var(--nav-width);
+            flex: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tab content */
+        .tab-content { display: none; flex: 1; animation: fadeIn 0.35s ease; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Scroll Reveal Animations --- */
+        /* ===================== */
+        /* SCROLL REVEALS        */
+        /* ===================== */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .reveal-left {
-            transform: translateX(-40px);
-        }
-        .reveal-right {
-            transform: translateX(40px);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translate(0);
+        .reveal-left { transform: translateX(-36px); }
+        .reveal-right { transform: translateX(36px); }
+        .reveal.visible { opacity: 1; transform: translate(0); }
+
+        /* ===================== */
+        /* WHITE CONTENT AREA    */
+        /* ===================== */
+        .page-body {
+            background-color: #ffffff;
         }
 
-        /* --- Footer --- */
-        footer { display: flex; height: 150px; margin-top: 30px; }
-        .footer-main { background-color: var(--sapta-navy); flex: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; }
-        .footer-accent { background-color: var(--sapta-teal); flex: 1; }
+        /* ===================== */
+        /* FOOTER                */
+        /* ===================== */
+        footer {
+            background-color: var(--nav-bg);
+            color: rgba(255,255,255,0.87);
+            padding: 32px 48px;
+            font-family: var(--font-heading);
+            font-size: 12pt;
+        }
+        footer h3 {
+            font-size: 15pt;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: rgba(73, 170, 212, 1);
+        }
+        footer p {
+            font-family: var(--font-serif);
+            font-size: 11pt;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ===================== */
+        /* RESPONSIVE            */
+        /* ===================== */
+        @media (max-width: 900px) {
+            :root { --nav-width: 0px; }
+            .side-nav { display: none; }
+            .main-content { margin-left: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="nav-logo" onclick="showTab('home')">
-                <img src="/assets/image_186b79.png" alt="Logo">
-                <span>SAPTA</span>
-            </div>
-            <ul class="nav-links">
-                <li onclick="showTab('home')">About Us</li>
-                <li onclick="showTab('events')">Events</li>
-                <li onclick="showTab('feedback')">Feedback Form</li>
-                <li class="dropdown">Registration
-                    <ul class="dropdown-menu">
-                        <li onclick="showTab('reg-spotlight')">Sapta Spotlight</li>
-                        <li onclick="showTab('reg-group')">Group Registration</li>
-                    </ul>
-                </li>
-                <li class="dropdown">Media
-                    <ul class="dropdown-menu">
-                        <li onclick="showTab('media-past')">Past Events</li>
-                        <li onclick="showTab('media-videos')">Videos/Performances</li>
-                        <li onclick="showTab('media-chronicles')">Chronicles</li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <main id="home" class="tab-content active">
-        {homeBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </main>
-
-    <section id="events" class="tab-content">
-        {eventsBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="feedback" class="tab-content">
-        {feedbackBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="reg-spotlight" class="tab-content">
-        {regSpotlightBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="reg-group" class="tab-content">
-        {regGroupBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="media-past" class="tab-content">
-        {mediaPastBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="media-videos" class="tab-content">
-        {mediaVideosBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <section id="media-chronicles" class="tab-content">
-        {mediaChroniclesBlocks.map((block) => {
-            const Component = components[block.type];
-            return Component ? <Component {...block} /> : null;
-        })}
-    </section>
-
-    <footer>
-        <div class="footer-main">
-            <h3>Contact us!</h3>
-            <p>Email: artssapta@gmail.com</p>
+    <!-- SIDE NAVIGATION -->
+    <nav class="side-nav" id="sideNav">
+        <div class="nav-logo" onclick="showTab('home')">
+            <img src="/assets/image_186b79.png" alt="SAPTA Logo">
+            <span>SAPTA</span>
         </div>
-        <div class="footer-accent"></div>
-    </footer>
+        <ul class="nav-items">
+            <li class="nav-item">
+                <span class="nav-link active" id="nav-home" onclick="showTab('home')">About Us</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link" id="nav-events" onclick="showTab('events')">Events</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link" id="nav-feedback" onclick="showTab('feedback')">Feedback Form</span>
+            </li>
+            <li class="nav-item nav-group" id="group-reg">
+                <div class="nav-group-label" onclick="toggleGroup('group-reg')">
+                    Registration <span class="chevron">▾</span>
+                </div>
+                <ul class="nav-sub">
+                    <li onclick="showTab('reg-spotlight')">Sapta Spotlight</li>
+                    <li onclick="showTab('reg-group')">Group Registration</li>
+                </ul>
+            </li>
+            <li class="nav-item nav-group" id="group-media">
+                <div class="nav-group-label" onclick="toggleGroup('group-media')">
+                    Media <span class="chevron">▾</span>
+                </div>
+                <ul class="nav-sub">
+                    <li onclick="showTab('media-past')">Past Events</li>
+                    <li onclick="showTab('media-videos')">Videos / Performances</li>
+                    <li onclick="showTab('media-chronicles')">Chronicles</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <main id="home" class="tab-content active page-body">
+            {homeBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </main>
+
+        <section id="events" class="tab-content page-body">
+            {eventsBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="feedback" class="tab-content page-body">
+            {feedbackBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="reg-spotlight" class="tab-content page-body">
+            {regSpotlightBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="reg-group" class="tab-content page-body">
+            {regGroupBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="media-past" class="tab-content page-body">
+            {mediaPastBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="media-videos" class="tab-content page-body">
+            {mediaVideosBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <section id="media-chronicles" class="tab-content page-body">
+            {mediaChroniclesBlocks.map((block) => {
+                const Component = components[block.type];
+                return Component ? <Component {...block} /> : null;
+            })}
+        </section>
+
+        <footer>
+            <h3>Contact Us</h3>
+            <p>Email: artssapta@gmail.com</p>
+        </footer>
+    </div>
 
     <script is:inline>
+        // --- Tab Navigation ---
+        const NAV_LINKS = ['home', 'events', 'feedback'];
+
+        function showTab(tabId) {
+            // Hide all
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // Show target
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+
+            // Update active nav link for top-level items
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+            const navLink = document.getElementById('nav-' + tabId);
+            if (navLink) navLink.classList.add('active');
+
+            // Re-init scroll reveals
+            setTimeout(initScrollReveal, 60);
+            window.scrollTo(0, 0);
+        }
+
+        // --- Group toggles ---
+        function toggleGroup(groupId) {
+            const group = document.getElementById(groupId);
+            if (group) group.classList.toggle('open');
+        }
+
+        // --- Scroll Reveal ---
         function initScrollReveal() {
-            const reveals = document.querySelectorAll('.reveal');
+            const reveals = document.querySelectorAll('.reveal:not(.visible)');
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -233,44 +396,12 @@ const components = {
                         obs.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.05,
-                rootMargin: '0px 0px -40px 0px'
-            });
+            }, { threshold: 0.04, rootMargin: '0px 0px -30px 0px' });
 
-            reveals.forEach(reveal => {
-                reveal.classList.remove('visible');
-                observer.observe(reveal);
-            });
+            reveals.forEach(el => observer.observe(el));
         }
 
-        function showTab(tabId) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            
-            // Toggle transparent header class based on active tab
-            const header = document.querySelector('header');
-            if (header) {
-                if (tabId === 'home' || tabId === 'events') {
-                    header.classList.add('transparent-header');
-                } else {
-                    header.classList.remove('transparent-header');
-                }
-            }
-            
-            // Re-initialize scroll reveals for the newly visible tab content
-            setTimeout(initScrollReveal, 50);
-            
-            window.scrollTo(0, 0);
-        }
-
-        // Initialize header and animations on load
         document.addEventListener('DOMContentLoaded', () => {
-            const header = document.querySelector('header');
-            if (header) {
-                header.classList.add('transparent-header');
-            }
             initScrollReveal();
         });
     </script>
