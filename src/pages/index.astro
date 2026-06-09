@@ -36,14 +36,7 @@ const components = {
   'google-form': GoogleForm,
 };
 
-const resolvePath = (path) => {
-  if (path && path.startsWith('/')) {
-    const base = import.meta.env.BASE_URL;
-    const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
-    return `${cleanBase}${path}`;
-  }
-  return path;
-};
+const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${p}` : p;
 ---
 <!DOCTYPE html>
 <html lang="en">

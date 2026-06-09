@@ -1,6 +1,6 @@
 ---
 const { title, flyerImage, color = "#2A7396" } = Astro.props;
-const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL}${p.slice(1)}` : p;
+const resolvePath = (p) => p && p.startsWith('/') ? `${import.meta.env.BASE_URL.replace(/\/$/, '')}${p}` : p;
 ---
 <section class="events-section">
     <div class="hero-small" style={`background-color: ${color};`}>
