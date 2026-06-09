@@ -80,8 +80,16 @@ const resolvePath = (path: string) => {
     @media (max-width: 768px) {
         .team-row {
             grid-template-columns: 1fr;
+            text-align: center;
+            justify-items: center;
         }
-        .team-img { max-width: 240px; }
-        .team-info h3 { font-size: 16pt; }
+        .team-img { 
+            max-width: 240px; 
+            margin: 0 auto;
+        }
+        .team-info h3 { 
+            font-size: 16pt; 
+            margin-top: 15px;
+        }
     }
 </style>
